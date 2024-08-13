@@ -1,0 +1,42 @@
+[2024-08-13T00:21:39.099+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=non-requeueable deps ti=<TaskInstance: prj001.fetch_data_and_upload_to_s3 scheduled__2024-08-12T00:00:00+00:00 [queued]>
+[2024-08-13T00:21:39.114+0000] {taskinstance.py:1956} INFO - Dependencies all met for dep_context=requeueable deps ti=<TaskInstance: prj001.fetch_data_and_upload_to_s3 scheduled__2024-08-12T00:00:00+00:00 [queued]>
+[2024-08-13T00:21:39.115+0000] {taskinstance.py:2170} INFO - Starting attempt 1 of 2
+[2024-08-13T00:21:39.137+0000] {taskinstance.py:2191} INFO - Executing <Task(PythonOperator): fetch_data_and_upload_to_s3> on 2024-08-12 00:00:00+00:00
+[2024-08-13T00:21:39.148+0000] {standard_task_runner.py:60} INFO - Started process 2931 to run task
+[2024-08-13T00:21:39.153+0000] {standard_task_runner.py:87} INFO - Running: ['***', 'tasks', 'run', 'prj001', 'fetch_data_and_upload_to_s3', 'scheduled__2024-08-12T00:00:00+00:00', '--job-id', '7', '--raw', '--subdir', 'DAGS_FOLDER/prj001.py', '--cfg-path', '/tmp/tmp8zxluwf1']
+[2024-08-13T00:21:39.157+0000] {standard_task_runner.py:88} INFO - Job 7: Subtask fetch_data_and_upload_to_s3
+[2024-08-13T00:21:39.227+0000] {task_command.py:423} INFO - Running <TaskInstance: prj001.fetch_data_and_upload_to_s3 scheduled__2024-08-12T00:00:00+00:00 [running]> on host 1c88467959a9
+[2024-08-13T00:21:39.347+0000] {taskinstance.py:2480} INFO - Exporting env vars: AIRFLOW_CTX_DAG_OWNER='***' AIRFLOW_CTX_DAG_ID='prj001' AIRFLOW_CTX_TASK_ID='fetch_data_and_upload_to_s3' AIRFLOW_CTX_EXECUTION_DATE='2024-08-12T00:00:00+00:00' AIRFLOW_CTX_TRY_NUMBER='1' AIRFLOW_CTX_DAG_RUN_ID='scheduled__2024-08-12T00:00:00+00:00'
+[2024-08-13T00:21:39.407+0000] {taskinstance.py:2698} ERROR - Task failed with exception
+Traceback (most recent call last):
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/models/taskinstance.py", line 433, in _execute_task
+    result = execute_callable(context=context, **execute_callable_kwargs)
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 199, in execute
+    return_value = self.execute_callable()
+  File "/home/airflow/.local/lib/python3.8/site-packages/airflow/operators/python.py", line 216, in execute_callable
+    return self.python_callable(*self.op_args, **self.op_kwargs)
+  File "/opt/airflow/dags/prj001.py", line 23, in fetch_job_details
+    conn.request("GET", "/get-job-details?job_url=https%3A%2F%2Fwww.linkedin.com%2Fjobs%2Fview%2F3766410207%2F&include_skills=false&include_hiring_team=false", headers=headers)
+  File "/usr/local/lib/python3.8/http/client.py", line 1256, in request
+    self._send_request(method, url, body, headers, encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1302, in _send_request
+    self.endheaders(body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1251, in endheaders
+    self._send_output(message_body, encode_chunked=encode_chunked)
+  File "/usr/local/lib/python3.8/http/client.py", line 1011, in _send_output
+    self.send(msg)
+  File "/usr/local/lib/python3.8/http/client.py", line 951, in send
+    self.connect()
+  File "/usr/local/lib/python3.8/http/client.py", line 1418, in connect
+    super().connect()
+  File "/usr/local/lib/python3.8/http/client.py", line 922, in connect
+    self.sock = self._create_connection(
+  File "/usr/local/lib/python3.8/socket.py", line 787, in create_connection
+    for res in getaddrinfo(host, port, 0, SOCK_STREAM):
+  File "/usr/local/lib/python3.8/socket.py", line 918, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+socket.gaierror: [Errno -2] Name or service not known
+[2024-08-13T00:21:39.426+0000] {taskinstance.py:1138} INFO - Marking task as UP_FOR_RETRY. dag_id=prj001, task_id=fetch_data_and_upload_to_s3, execution_date=20240812T000000, start_date=20240813T002139, end_date=20240813T002139
+[2024-08-13T00:21:39.444+0000] {standard_task_runner.py:107} ERROR - Failed to execute job 7 for task fetch_data_and_upload_to_s3 ([Errno -2] Name or service not known; 2931)
+[2024-08-13T00:21:39.486+0000] {local_task_job_runner.py:234} INFO - Task exited with return code 1
+[2024-08-13T00:21:39.511+0000] {taskinstance.py:3280} INFO - 0 downstream tasks scheduled from follow-on schedule check
